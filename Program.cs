@@ -18,6 +18,9 @@ switch (task)
     case "54":
     Task54(task);
     break;
+    case "56":
+    Task56(task);
+    break;
     default:
     break;
 }
@@ -74,6 +77,28 @@ for (int i = 0; i < array2d.GetLength(0); i++)
     }
 }
 
+int MinSumRowArray2d (int [,] array2d)
+{
+    int sumRow;
+    int minSumRow = 0;
+    int numberRow = 1;
+    for (int i = 0; i < array2d.GetLength(0); i++)
+    {
+        sumRow = 0;
+        for (int j = 0; j < array2d.GetLength(1); j++)
+        {
+            sumRow += array2d[i, j];
+        }
+        if (i == 0) minSumRow = sumRow;
+        if (sumRow < minSumRow)
+        {
+            minSumRow = sumRow;
+            numberRow = i + 1;
+        }
+    }
+    return (numberRow);
+}
+
 void Task54 (string task)                                   // Решение задачи №54
 {
     string message = "Введите количество строк массива m: ";
@@ -88,3 +113,15 @@ void Task54 (string task)                                   // Решение з
     PrintIntArray2d(array2d);
 }
 
+void Task56 (string task)                                   // Решение задачи №56
+{
+    string message = "Введите количество строк массива m: ";
+    int m = size (message);
+    message = "Введите количество столбцов массива n: ";
+    int n = size (message);
+    int [,] array2d = FillIntArray2d(m, n);
+    Console.WriteLine("Исходный массив:");
+    PrintIntArray2d(array2d);
+    int numRow = MinSumRowArray2d(array2d);
+    Console.Write($"Минимальная сумма элемнтов в {numRow} строке");
+}
