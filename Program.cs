@@ -34,13 +34,16 @@ string? task = Console.ReadLine();
 switch (task)
 {
     case "54":
-    Task54(task);
+    Task54 (task);
     break;
     case "56":
-    Task56(task);
+    Task56 (task);
     break;
     case "58":
-    Task58(task);
+    Task58 (task);
+    break;
+    case "62":
+    Task62 (task);
     break;
     default:
     break;
@@ -72,7 +75,8 @@ void PrintIntArray2d (int [,] array2d)                      // Вывод на �
     {
         for (int j = 0; j < array2d.GetLength(1); j++)
         {
-           Console.Write($"[{array2d[i, j]}] ");
+            if (array2d[i, j] < 10) Console.Write($"[0{array2d[i, j]}] ");
+            else Console.Write($"[{array2d[i, j]}] ");
         }
         Console.WriteLine();
     }
@@ -98,7 +102,7 @@ for (int i = 0; i < array2d.GetLength(0); i++)
     }
 }
 
-int MinSumRowArray2d (int [,] array2d)
+int MinSumRowArray2d (int [,] array2d)                      // Поиск минимальной суммы строки в массиве
 {
     int sumRow;
     int minSumRow = 0;
@@ -169,7 +173,7 @@ void Task56 (string task)                                   // Решение з
     Console.Write($"Минимальная сумма элемнтов в {numRow} строке");
 }
 
-void Task58(string task)                                    // Решение задачи №58
+void Task58 (string task)                                   // Решение задачи №58
 {
     string message = "Задайте размер m первой матрицы: ";
     int m = size (message);
@@ -188,3 +192,44 @@ void Task58(string task)                                    // Решение з
     int [,] mult = MultiplicationArrays(array2d1, array2d2);
 }
 
+void Task62 (string task)                                   // Решение задачи №62
+{
+    int m = 4; int n1 = 0;
+    int n = 4; int m1 = 0;
+    int [,] array2d = new int [m, n];
+    int i = 1;
+    int j = 0;
+    int number = 1;
+    while (number <= m * n)
+    {
+        while (j < array2d.GetLength(1) - n1)
+        {
+            j++;
+            array2d [i - 1, j - 1] = number;
+            number++;
+        }
+        n1++;
+        while (i < array2d.GetLength(0) - m1)
+        {
+            i++;
+            array2d [i - 1, j - 1] = number;
+            number++;
+        }
+        m1++;
+        while (j > 0 + n1)
+        {
+            j--;
+            array2d [i - 1, j - 1] = number;
+            number++;
+        }
+        while (i > 1 + m1)
+        {
+            i--;
+            array2d [i - 1, j - 1] = number;
+            number++;
+        }
+    }
+
+PrintIntArray2d (array2d);
+    
+}
